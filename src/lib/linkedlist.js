@@ -2,19 +2,36 @@
 
 const Node = require('./node');
 
-module.exports = class LinkedList {
+class LinkedList {
   constructor() {
     this.head = null;
   }
 
-
-  append(value) {
-    // 
+  append(value) { 
     const node = new Node(value);
-
     if (!this.head) {
       this.head = node;
       return this;
     }
+    let currentNode = this.head;
+    while(currentNode.next) {
+      currentNode = currentNode.next;
+    }
+
+    currentNode.next = node;
+    return this;
   }
-};
+
+  prepend(value) {
+    let node = new Node(value);
+    if (!this.head) {
+      this.head = node;
+      return this;
+    }
+
+    node.next = this.head;
+    this.head = node;
+  }
+}
+
+module.exports = LinkedList;
